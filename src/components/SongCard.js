@@ -1,5 +1,13 @@
 import React from "react";
 
+class Song{
+    constructor(n, a, l){
+        this.title = n;
+        this.artist = a;
+        this.youTubeId = l;
+    }
+}
+
 export default class SongCard extends React.Component {
     constructor(props) {
         super(props);
@@ -53,6 +61,20 @@ export default class SongCard extends React.Component {
         // ASK THE MODEL TO MOVE THE DATA
         this.props.moveCallback(sourceId, targetId);
     }
+    removeSong = (e) => {
+        console.log("REMOVING!!!");
+        let num = this.getItemNum()-1;
+        const { song } = this.props;
+        let send = new Song(song.title, song.artist, song.youTubeId);
+        console.log("--> " + send.title + ", " + send.artist + ", " + send.youTubeId);
+        this.props.removeCallback(num, send);
+    }
+    edit = (e) => {
+        let num = this.getItemNum()-1;
+        const { song } = this.props;
+        let send = new Song(song.title, song.artist, song.youTubeId);
+        this.props.editCallback(num, send);
+    }
 
     getItemNum = () => {
         return this.props.id.substring("playlist-song-".length);
@@ -61,7 +83,7 @@ export default class SongCard extends React.Component {
     render() {
         const { song } = this.props;
         let num = this.getItemNum();
-        console.log("num: " + num);
+        //console.log("num: " + num);
         let itemClass = "playlister-song";
         if (this.state.draggedTo) {
             itemClass = "playlister-song-dragged-to";
@@ -75,9 +97,14 @@ export default class SongCard extends React.Component {
                 onDragEnter={this.handleDragEnter}
                 onDragLeave={this.handleDragLeave}
                 onDrop={this.handleDrop}
+                onDoubleClick={this.edit}
                 draggable="true"
             >
-                {song.title} by {song.artist}
+                {num}. <a href={"https://www.youtube.com/watch?v=" + song.youTubeId}>
+                    {song.title} by {song.artist}
+                    </a>
+
+                <button className={"playlister-song-button"} onMouseDown={this.removeSong}>X</button>
             </div>
         )
     }

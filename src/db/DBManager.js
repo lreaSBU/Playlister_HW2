@@ -4,7 +4,10 @@ export default class DBManager {
     // MEANS THE BROWSER'S LOCAL STORAGE
     queryGetSessionData = () => {
         let sessionDataString = localStorage.getItem("playlister-data");
-        return JSON.parse(sessionDataString);
+        console.log("LOADING SESSION:\n");
+        var ret = JSON.parse(sessionDataString);
+        console.log(ret);
+        return ret;
     }
 
     queryIsList = (key) => {
@@ -18,7 +21,10 @@ export default class DBManager {
      */
     queryGetList = (key) => {
         let listString = localStorage.getItem("playlister-list-" + key);
-        return JSON.parse(listString);
+        var ret = JSON.parse(listString);
+        console.log("LOADING LIST " + key + ":\n");
+        //console.log(ret);
+        return ret;
     }
 
     mutationCreateList = (list) => {
@@ -27,7 +33,9 @@ export default class DBManager {
 
     mutationUpdateList = (list) => {
         // AND FLOW THOSE CHANGES TO LOCAL STORAGE
+        console.log("SAVING LIST:\n");
         let listString = JSON.stringify(list);
+        //console.log(listString);
         localStorage.setItem("playlister-list-" + list.key, listString);
     }
     

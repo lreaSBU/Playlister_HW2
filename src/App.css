@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Tangerine:300,400,500&display=swap');
 :root {
   /* 
         FIRST WE'LL DEFINE OUR SWATCHES, i.e. THE COMPLEMENTARY
@@ -19,7 +20,7 @@ body {
 
 #root {
   background-color: var(--swatch-primary);
-  font-family: serif;
+  font-family: 'Tangerine', serif;
   position: absolute;
   width: 80%;
   left: 10%;
@@ -108,11 +109,21 @@ body {
   float:left;
 }
 
-.list-card, .selected-list-card, .unselected-list-card {
-  font-size: 18pt;
+.playlister-song, .selected-list-card, .unselected-list-card {
+  font-size: 32pt;
   margin: 10px;
   padding: 20px;
   border-radius: 25px;
+  background-color: var(--swatch-complement);
+}
+
+.playlister-song:hover {
+  background-color: var(--swatch-contrast);
+  color: white;
+}
+
+.playlister-song:hover .playlist-link {
+  color: white;
 }
 
 .unselected-list-card:hover {
@@ -130,15 +141,15 @@ body {
   background-color: var(--swatch-complement);
 }
 
-.list-card-button {
+.playlister-song-button {
   float:right;
-  font-size:18pt;
+  font-size:24pt;
 }
 
 .playlister-button, .playlister-button-disabled {
   font-size:36pt;
   border-width: 0px;
-  float:left;
+  float:right;
   color: black;
   cursor: pointer;
 }
@@ -156,7 +167,7 @@ body {
 .playlister-song, .playlister-song-dragged-to { 
   display:flex;
   align-items: center;
-  font-size: 24pt;
+  font-size: 34pt;
   height:20%;
 }
 
@@ -191,8 +202,8 @@ input {
 
 .modal-root {
   position: relative;
-  max-width: 1200vw;
-  max-height: 600vh;
+  max-width: 80%;
+  max-height: 50%;
   overflow: visible;
   display: flex;
   flex-direction: column;
@@ -298,6 +309,16 @@ span {
 
 .modal p + p {
   margin-top: 1rem;
+}
+
+.toolbar-button{
+  font-weight: bold;
+}
+
+.toolbar-button-disabled{
+  font-weight: bold;
+  opacity: 0.25; 
+  cursor: not-allowed;
 }
 
 /* ANIMATIONS
